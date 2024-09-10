@@ -107,7 +107,33 @@ export default class LinkedList{
         };
 
         return -1;
-      }
+      };
+
+      iterateNodes(type){
+        let values = [];
+        if(type === "keys"){
+            let currentNode = this.head;
+            for(let i = 0; i < this.length; i++){
+                values.append(currentNode.key);
+                currentNode = currentNode.next;
+            };
+        }
+        else if(type === "values"){
+            let currentNode = this.head;
+            for(let i = 0; i < this.length; i++){
+                values.append(currentNode.value);
+                currentNode = currentNode.next;
+            };
+        }
+        else{
+            let currentNode = this.head;
+            for(let i = 0; i < this.length; i++){
+                values.append({KEY: currentNode.key, VALUE: currentNode.value});
+                currentNode = currentNode.next;
+            };
+        }
+
+      };
 
     toString(){
         let returnString = "( " + this.head.value + " ) -> "

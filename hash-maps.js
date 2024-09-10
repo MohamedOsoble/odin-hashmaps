@@ -96,14 +96,29 @@ class HashMap {
     };
 
     keys(){
-        //pass
+        let keys = [];
+        for(let i = 0; i < this.capacity -1; i++){
+            bucket = this.buckets[i]
+            keys.append(bucket.iterateNodes("keys"));
+        }
+        return keys;
     };
 
     values(){
-        //pass
+        let values = [];
+        for(let i = 0; i < this.capacity -1; i++){
+            bucket = this.buckets[i]
+            values.append(bucket.iterateNodes("values"));
+        }
+        return values;
     };
 
     entries(){
-        //pass
+        let entries = [];
+        for(let i = 0; i < this.capacity -1; i++){
+            bucket = this.buckets[i]
+            entries.append(bucket.iterateNodes("entries"));
+        }
+        return entries;
     };
 };
