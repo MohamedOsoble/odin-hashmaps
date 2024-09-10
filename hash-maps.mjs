@@ -64,6 +64,9 @@ export default class HashMap {
         this.size++;
 
         // add functionality to resize buckets later
+        if(this.needsResize()){
+            this.resize()
+        }
     };
 
     get(key){
