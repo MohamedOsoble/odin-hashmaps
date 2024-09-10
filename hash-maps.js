@@ -37,21 +37,24 @@ class HashMap {
 
         // Loop over all nodes while it's not empty, if an identical key is found, update the value
         while(node) {
-            if(node.value.KEY === key){
-                node.value.VALUE = value;
+            if(node.key === key){
+                node.value = value;
                 return;
             };
             node = node.next;
         }
 
         // if not found, update the final node and add the K,V pair
-        bucket.append({KEY: key, VALUE: value });
+        bucket.append(key, value);
 
         // add functionality to resize buckets later
     };
 
     get(key){
-        //pass
+
+        // get bucket location
+        const bucket = this.buckets[this.hash(key)];
+        return bucket.at(bucket.find())
     };
 
     has(key){

@@ -94,6 +94,22 @@ export default class LinkedList{
         return index
     }
 
+    findKey(key) {
+        let currentNode = this.head;
+        let currentIndex = 0;
+
+        while (currentNode !== null) {
+          if (currentNode.key === key) {
+            return currentIndex;
+          }
+
+          currentNode = currentNode.next;
+          currentIndex++;
+        }
+
+        return -1;
+      }
+
     toString(){
         let returnString = "( " + this.head.value + " ) -> "
         let currentNode = this.head.next
@@ -109,6 +125,7 @@ export default class LinkedList{
 
 class Node{
     constructor(){
+        this.key = null
         this.value = null
         this.next = null
     }
