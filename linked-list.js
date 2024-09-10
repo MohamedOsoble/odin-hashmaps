@@ -53,7 +53,6 @@ export default class LinkedList{
 
     pop(value){
         let currentNode = this.head;
-        let currentTail = this.tail
         for(let i = 0; i < this.length; i++){
             if(currentNode.next == value){
                 this.tail = currentNode
@@ -101,11 +100,11 @@ export default class LinkedList{
         while (currentNode !== null) {
           if (currentNode.key === key) {
             return currentIndex;
-          }
+          };
 
           currentNode = currentNode.next;
           currentIndex++;
-        }
+        };
 
         return -1;
       }

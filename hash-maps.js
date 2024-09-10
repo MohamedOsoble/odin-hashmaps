@@ -4,6 +4,7 @@ class HashMap {
 
     constructor(){
         this.capacity = 16;
+        this.size = 0;
         this.loadFactor = 0.75
         this.buckets = this.initializeBuckets()
     };
@@ -30,6 +31,10 @@ class HashMap {
         return hashCode
     };
 
+    getBucket(key){
+        return this.buckets[this.hash(key)]
+    }
+
     set(key, value){
         const index = hash(key);
         const bucket = this.buckets[index];
@@ -46,6 +51,7 @@ class HashMap {
 
         // if not found, update the final node and add the K,V pair
         bucket.append(key, value);
+        this.size++;
 
         // add functionality to resize buckets later
     };
@@ -53,24 +59,40 @@ class HashMap {
     get(key){
 
         // get bucket location
-        const bucket = this.buckets[this.hash(key)];
-        return bucket.at(bucket.find())
+        const bucket = getBucket(key)
+        return bucket.at(bucket.findKey(key))
     };
 
     has(key){
-        //pass
+        const bucket = getBucket(key);
+        return bucket.findKey(key);
+
     };
 
     remove(key){
-        //pass
+        let bucket = get(key);
+        if(bucket){
+            bucket.pop(bucket.find(get(key)));
+            this.size--
+            return true;
+        }
+        else{
+            return false;
+        }
+
+
     };
 
     length(){
-        //pass
+        return this.size
     };
 
     clear(){
-        //pass
+        let oldBuckets = this.buckets;
+        this.capacity = 16;
+        this.size = 0;
+        this.buckets = this.initializeBuckets
+        return true;
     };
 
     keys(){
