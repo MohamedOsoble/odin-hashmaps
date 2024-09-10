@@ -119,14 +119,14 @@ export default class LinkedList{
         if(type === "keys"){
             let currentNode = this.head;
             for(let i = 0; i < this.length; i++){
-                values.push(currentNode.value.KEY);
+                values.push(currentNode.key);
                 currentNode = currentNode.next;
             };
         }
         else if(type === "values"){
             let currentNode = this.head;
             for(let i = 0; i < this.length; i++){
-                values.push(currentNode.value.VALUE);
+                values.push(currentNode.value);
                 currentNode = currentNode.next;
             };
         }

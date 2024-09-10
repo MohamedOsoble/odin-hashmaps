@@ -19,8 +19,8 @@ export default class HashMap {
 
     resize(){
         const oldBuckets = this.buckets;
-        this.capacity *= 2;
-        this.buckets = this.initializeBuckets;
+        this.capacity = this.capacity * 2;
+        this.buckets = this.initializeBuckets();
         for(const bucket of oldBuckets){
             let node = bucket.head;
             while(node){
@@ -72,7 +72,7 @@ export default class HashMap {
     get(key){
 
         // get bucket location
-        const bucket = getBucket(key)
+        const bucket = this.getBucket(key)
         return bucket.at(bucket.findKey(key))
     };
 
@@ -83,9 +83,10 @@ export default class HashMap {
     };
 
     remove(key){
-        let bucket = get(key);
+        let bucket = this.getBucket(key);
         if(bucket){
-            bucket.pop(bucket.find(get(key)));
+            let searchValue = this.get(key).value;
+            bucket.pop(searchValue);
             this.size--
             return true;
         }
@@ -109,32 +110,55 @@ export default class HashMap {
     };
 
     keys(){
-        let keys = [];
-        for(let i = 0; i < this.capacity -1; i++){
-            let bucket = this.buckets[i]
-            keys.push(bucket.iterateNodes("keys"));
+        if(this.length < 1){
+            return [];
         }
-        return keys;
+        else{
+            let keys = [];
+            for(let i = 0; i < this.capacity -1; i++){
+                let bucket = this.buckets[i]
+                let key = bucket.iterateNodes("keys");
+                if(key.length > 0){
+                    keys.push(key);
+                }
+            }
+            return keys;
+        }
+
     };
 
     values(){
-        let values = [];
-        for(let i = 0; i < this.capacity -1; i++){
-            let bucket = this.buckets[i]
-            values.push(bucket.iterateNodes("values"));
+        if(this.length < 1){
+            return [];
         }
-        return values;
+        else{
+            let values = [];
+            for(let i = 0; i < this.capacity -1; i++){
+                let bucket = this.buckets[i]
+                let value = bucket.iterateNodes("values");
+                if(value.length > 0){
+                    values.push(value);
+                }
+            }
+            return values;
+        }
     };
 
     entries(){
-        let entries = [];
-        for(let i = 0; i < this.capacity -1; i++){
-            let bucket = this.buckets[i]
-            let entry = bucket.iterateNodes("entries")
-            if(entry.length > 0){
-                entries.push(entry)
-            }
+        if(this.size < 1){
+            return [];
         }
-        return entries;
+        else{
+            let entries = [];
+
+            for(let i = 0; i < this.capacity -1; i++){
+                let bucket = this.buckets[i]
+                let entry = bucket.iterateNodes("entries")
+                if(entry.length > 0){
+                    entries.push(entry)
+                }
+            }
+            return entries;
+        }
     };
 };
